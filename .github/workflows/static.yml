@@ -16,10 +16,10 @@ jobs:
     steps:
     #transer code ..must
     - name: Checkout Code
-      uses: action/checkout@v3
+      uses: actions/checkout@v3
     # optional based on Project [install node with 16 version]
     - name: Setup enviroment
-      uses: action/setup-node@v3
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
     #
@@ -34,23 +34,23 @@ jobs:
         npm test >test-result.txt || true 
 
     - name: Upload the test-result
-      uses: action/upload-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
         name: test-result
         path: test-result.txt
       
   deploy:
     needs: demo-test
-    runs-on: [ostad-tag,ubuntu-latest]
+    runs-on: [ostad-tag]
 
     steps:
     #transer code ..must
     - name: Checkout Code
-      uses: action/checkout@v3
+      uses: actions/checkout@v3
     
 
     - name: Download the test-result
-      uses: action/download-artifact@v4
+      uses: actions/download-artifact@v4
       with:
         name: test-result
 
@@ -60,7 +60,7 @@ jobs:
 
      # optional based on Project [install node with 16 version]
     - name: Setup enviroment
-      uses: action/setup-node@v3
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
     
